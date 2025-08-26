@@ -2,1148 +2,860 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mehrshad Hamavandy - Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio • Yazd Cyber Police Projects</title>
+    <meta
+      name="description"
+      content="Professional portfolio of projects developed for Yazd Cyber Police, with live GitHub stats and smooth animations."
+    />
+    <meta name="color-scheme" content="dark light" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/iransansx@v9.0.2/dist/font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       :root {
-        --primary-glow: rgba(0, 212, 255, 0.5);
-        --secondary-glow: rgba(124, 58, 237, 0.8);
-        --dark-bg: #0f0f23;
-        --mid-bg: #1a1a3e;
-        --light-bg: #2d2d5f;
-        --text-color: #ffffff;
-        --accent-blue: #00d4ff;
-        --accent-purple: #7c3aed;
-        --accent-red: #ef4444;
+        --ring: 0 212 255;
+        --bg1: #0b1020;
+        --bg2: #141a35;
+        --bg3: #1f2654;
+        --brand1: rgba(0, 212, 255, 0.28);
+        --brand2: rgba(124, 58, 237, 0.28);
       }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
+      html,
       body {
-        font-family: "Vazirmatn", "IRANSans", sans-serif;
-        background: linear-gradient(
-          135deg,
-          var(--dark-bg) 0%,
-          var(--mid-bg) 50%,
-          var(--light-bg) 100%
-        );
-        color: var(--text-color);
+        height: 100%;
+      }
+      body {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+          Roboto, Arial;
+        background: radial-gradient(
+            1200px 800px at 10% -10%,
+            var(--brand1),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 700px at 110% 110%,
+            var(--brand2),
+            transparent 60%
+          ),
+          linear-gradient(130deg, var(--bg1), var(--bg2), var(--bg3));
+        color: #f8fafc;
         overflow-x: hidden;
       }
-
-      /* Welcome Screens */
-      .welcome-screen {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+      /* Decorative ambient dots */
+      .stars {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        opacity: 1;
-        transition: all 1s ease-in-out;
-      }
-
-      .welcome-screen.fade-out {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-
-      .welcome-screen.hidden {
-        display: none;
-      }
-
-      .logo {
-        font-size: 3.5rem;
-        font-weight: bold;
-        background: linear-gradient(
-          45deg,
-          var(--accent-blue),
-          var(--accent-purple),
-          var(--accent-red)
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 2rem;
-        animation: glow 2s ease-in-out infinite alternate;
-      }
-
-      @keyframes glow {
-        from {
-          filter: drop-shadow(0 0 20px var(--primary-glow));
-        }
-        to {
-          filter: drop-shadow(0 0 30px var(--secondary-glow));
-        }
-      }
-
-      .subtitle {
-        font-size: 1.5rem;
-        opacity: 0.8;
-        text-align: center;
-        margin-bottom: 3rem;
-        animation: slideUp 1s ease-out 0.5s both;
-      }
-
-      @keyframes slideUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 0.8;
-          transform: translateY(0);
-        }
-      }
-
-      .loading-bar {
-        width: 300px;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 2px;
-        overflow: hidden;
-      }
-
-      .loading-fill {
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          var(--accent-blue),
-          var(--accent-purple)
-        );
-        width: 0%;
-        animation: loading 3s ease-in-out forwards;
-      }
-
-      @keyframes loading {
-        to {
-          width: 100%;
-        }
-      }
-
-      /* Main Content */
-      .main-content {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: all 1s ease-out;
-      }
-
-      .main-content.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .hero {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        animation: gridMove 20s linear infinite;
-      }
-
-      @keyframes gridMove {
-        0% {
-          transform: translate(0, 0);
-        }
-        100% {
-          transform: translate(10px, 10px);
-        }
-      }
-
-      .hero-content {
-        z-index: 2;
-        position: relative;
-      }
-
-      .hero-title {
-        font-size: 4rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        background: linear-gradient(45deg, #ffffff, var(--accent-blue));
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .hero-subtitle {
-        font-size: 1.3rem;
-        opacity: 0.9;
-        margin-bottom: 2rem;
-      }
-
-      .scroll-indicator {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 2rem 0;
-        animation: bounce 2s infinite;
-      }
-
-      .scroll-text {
-        font-size: 0.9rem;
-        opacity: 0.7;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      .scroll-arrow {
-        width: 2px;
-        height: 40px;
-        background: linear-gradient(to bottom, var(--accent-blue), transparent);
-        position: relative;
-        margin-bottom: 1rem;
-      }
-
-      .scroll-arrow::after {
-        content: "";
-        position: absolute;
-        bottom: -8px;
-        left: -4px;
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 10px solid var(--accent-blue);
-      }
-
-      @keyframes bounce {
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-10px);
-        }
-        60% {
-          transform: translateY(-5px);
-        }
-      }
-
-      .cta-button {
-        background: linear-gradient(
-          45deg,
-          var(--accent-purple),
-          var(--accent-red)
-        );
-        border: none;
-        padding: 15px 40px;
-        font-size: 1.1rem;
-        color: white;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
-        text-decoration: none;
-      }
-
-      .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5);
-      }
-
-      /* Scroll Animations */
-      .scroll-animate {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .scroll-animate.animate {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .scroll-animate-left {
-        opacity: 0;
-        transform: translateX(-100px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .scroll-animate-left.animate {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      .scroll-animate-right {
-        opacity: 0;
-        transform: translateX(100px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .scroll-animate-right.animate {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      .scroll-animate-scale {
-        opacity: 0;
-        transform: scale(0.8) rotateY(20deg);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .scroll-animate-scale.animate {
-        opacity: 1;
-        transform: scale(1) rotateY(0deg);
-      }
-      .scroll-animate-fade {
-        opacity: 0;
-        transition: opacity 1s ease-out;
-      }
-      .scroll-animate-fade.animate {
-        opacity: 1;
-      }
-
-      /* Enhanced Project Cards */
-      .project-card {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        padding: 2.5rem;
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
-        overflow: hidden;
-        min-height: 550px;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .project-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 212, 255, 0.1) 0%,
-          rgba(124, 58, 237, 0.1) 100%
-        );
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 0;
-      }
-
-      .project-card:hover::before {
-        opacity: 1;
-      }
-      .project-card > * {
-        position: relative;
-        z-index: 1;
-      }
-      .project-card:hover {
-        transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 25px 50px var(--primary-glow);
-        border-color: rgba(0, 212, 255, 0.4);
-      }
-
-      .project-image {
-        width: 100%;
-        height: 200px;
-        border-radius: 15px;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-      }
-      .project-card:hover .project-image {
-        transform: scale(1.05);
-      }
-
-      .project-content {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .project-description {
-        line-height: 1.6;
-        margin-bottom: auto;
-        opacity: 0.9;
-        flex-grow: 1;
-      }
-
-      .project-links {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
-        z-index: 5; /* Ensure buttons are on top */
-      }
-
-      .project-link,
-      .project-link-disabled {
-        background: rgba(30, 30, 60, 0.7);
-        backdrop-filter: blur(5px);
-        color: white;
-        text-decoration: none;
-        padding: 12px 20px;
-        border-radius: 10px;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
-        flex: 1;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .project-link svg {
-        width: 20px;
-        height: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      .project-link:hover svg {
-        transform: scale(1.2) rotate(5deg);
-      }
-
-      .project-link:hover {
-        background: var(--accent-blue);
-        color: var(--dark-bg);
-        border-color: var(--accent-blue);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px var(--primary-glow);
-      }
-
-      .project-link:active {
-        transform: translateY(-2px) scale(0.98);
-        box-shadow: 0 5px 15px var(--primary-glow);
-      }
-
-      .project-link-disabled {
-        background: rgba(255, 255, 255, 0.05);
-        color: rgba(255, 255, 255, 0.5);
-        cursor: not-allowed;
-        border-color: rgba(255, 255, 255, 0.1);
-        box-shadow: none;
-      }
-      .project-link-disabled:hover {
-        transform: none;
-        box-shadow: none;
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
-      }
-      .project-link-disabled svg {
-        opacity: 0.5;
-      }
-
-      /* Projects Section */
-      .projects-section {
-        padding: 100px 0;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 3rem;
-        margin-bottom: 4rem;
-        background: linear-gradient(
-          45deg,
-          var(--accent-blue),
-          var(--accent-purple)
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2.5rem;
-        padding: 0 2rem;
-      }
-
-      .kavosh-bg {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      }
-      .bankiran-bg {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      }
-      .telyab-bg {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      }
-
-      .project-title {
-        font-size: 1.8rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        color: var(--accent-blue);
-      }
-
-      .project-developer {
-        font-size: 0.9rem;
-        opacity: 0.7;
-        margin-bottom: 1rem;
-      }
-
-      .tech-stack {
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .tech-stack h4 {
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-        opacity: 0.8;
-      }
-
-      .tech-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-
-      .tech-tag {
-        background: rgba(124, 58, 237, 0.3);
-        padding: 4px 12px;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        border: 1px solid rgba(124, 58, 237, 0.5);
-      }
-
-      /* Kavosh Log Terminal */
-      .terminal-window {
-        background: #1e1e1e;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        margin: 0 2rem;
-        overflow: hidden;
-      }
-      .terminal-header {
-        background: #333;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        position: relative;
-      }
-      .terminal-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-      }
-      .dot-red {
-        background: #ff5f56;
-      }
-      .dot-yellow {
-        background: #ffbd2e;
-      }
-      .dot-green {
-        background: #27c93f;
-      }
-      .terminal-title {
-        color: #ccc;
-        font-family: monospace;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .terminal-body {
-        height: 400px;
-        overflow-y: scroll; /* Changed to scroll to always show scrollbar */
-        padding: 1rem;
-        font-family: "Courier New", Courier, monospace;
-        font-size: 0.9rem;
-        scrollbar-width: thin; /* For Firefox */
-        scrollbar-color: #555 #2a2a2a; /* For Firefox */
-      }
-      /* For Chrome, Safari, and Edge */
-      .terminal-body::-webkit-scrollbar {
-        width: 10px;
-      }
-      .terminal-body::-webkit-scrollbar-track {
-        background: #2a2a2a;
-      }
-      .terminal-body::-webkit-scrollbar-thumb {
-        background-color: #555;
-        border-radius: 5px;
-        border: 2px solid #2a2a2a;
-      }
-      .terminal-body::-webkit-scrollbar-thumb:hover {
-        background-color: #777;
-      }
-      #log-output {
-        display: block;
-        white-space: pre-wrap;
-        word-break: break-all;
-        line-height: 1.5;
-      }
-      .log-line-error {
-        color: #f44336;
-      }
-      .log-line-warn {
-        color: #ffeb3b;
-      }
-      .log-line-info {
-        color: #e0e0e0;
-      }
-      .log-line-success {
-        color: #4caf50;
-      }
-      .log-line-dim {
-        color: #888;
-      }
-
-      /* Footer */
-      .footer {
-        text-align: center;
-        padding: 3rem;
-        opacity: 0.7;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .hero-title,
-        .logo {
-          font-size: 2.5rem;
-        }
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-        .project-links {
-          flex-direction: column;
-        }
-      }
-
-      /* Particles Background */
-      .particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         pointer-events: none;
         z-index: -1;
       }
-      .particle {
+      .stars span {
         position: absolute;
-        background: var(--primary-glow);
+        width: 2px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.45);
         border-radius: 50%;
-        animation: float 6s ease-in-out infinite;
+        animation: twinkle 3.2s infinite ease-in-out;
       }
-      @keyframes float {
+      @keyframes twinkle {
         0%,
         100% {
-          transform: translateY(0px) rotate(0deg);
+          opacity: 0.15;
+          transform: scale(0.9);
         }
         50% {
-          transform: translateY(-20px) rotate(180deg);
+          opacity: 0.75;
+          transform: scale(1.35);
+        }
+      }
+
+      /* Page loader */
+      .loader {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: rgba(10, 12, 24, 0.9);
+        z-index: 60;
+        backdrop-filter: blur(6px);
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      .loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .ring {
+        width: 72px;
+        height: 72px;
+        border-radius: 999px;
+        border: 3px solid rgba(255, 255, 255, 0.18);
+        border-top-color: rgb(var(--ring));
+        animation: spin 1s linear infinite;
+        box-shadow: 0 0 40px rgba(var(--ring), 0.35);
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .logo-type {
+        margin-top: 16px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+      }
+
+      /* Cards */
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.03)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.5rem;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .card:hover {
+        transform: translateY(-8px) scale(1.01) rotateX(0.35deg)
+          rotateY(-0.65deg);
+        box-shadow: 0 30px 80px rgba(var(--ring), 0.25);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .thumb {
+        position: relative;
+        height: 11rem;
+        overflow: hidden;
+        border-radius: 1rem;
+      }
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+      }
+      .thumb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.45),
+          transparent 65%
+        );
+      }
+      .card:hover .thumb img {
+        opacity: 1;
+      }
+
+      /* Skeletons */
+      .skeleton {
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 0.5rem;
+      }
+      .skeleton::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: shimmer 1.4s infinite;
+      }
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* Tech tags */
+      .tag {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        height: 2.75rem;
+        border-radius: 0.9rem;
+        padding: 0 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease,
+          box-shadow 0.25s ease;
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .btn:hover {
+        background: #fff;
+        color: #000;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+      }
+      .btn[aria-disabled="true"] {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      /* Section dividers */
+      .divider {
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
+      }
+
+      /* Parallax blobs */
+      .blob {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(60px);
+        opacity: 0.5;
+        transition: transform 0.3s ease;
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .card:hover {
+          transform: none;
         }
       }
     </style>
   </head>
   <body>
-    <div class="particles" id="particles"></div>
+    <!-- Ambient stars -->
+    <div class="stars" aria-hidden="true"></div>
 
-    <div class="welcome-screen" id="welcome1">
-      <div class="logo">FATA CYBERPOLICE</div>
-      <div class="subtitle">Digital Excellence & Innovation</div>
-      <div class="loading-bar"><div class="loading-fill"></div></div>
+    <!-- Parallax blobs -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    >
+      <div
+        class="blob"
+        id="blob1"
+        style="
+          top: -80px;
+          left: -80px;
+          width: 420px;
+          height: 420px;
+          background: radial-gradient(
+            circle at 30% 30%,
+            var(--brand1),
+            transparent 60%
+          );
+        "
+      ></div>
+      <div
+        class="blob"
+        id="blob2"
+        style="
+          bottom: -40px;
+          right: -60px;
+          width: 460px;
+          height: 460px;
+          background: radial-gradient(
+            circle at 70% 70%,
+            var(--brand2),
+            transparent 60%
+          );
+        "
+      ></div>
     </div>
 
-    <div class="welcome-screen" id="welcome2" style="display: none">
-      <div class="logo">PORTFOLIO SHOWCASE</div>
-      <div class="subtitle">Presenting the work of Mehrshad Hamavandy</div>
-      <div class="loading-bar"><div class="loading-fill"></div></div>
+    <!-- Page Loader -->
+    <div
+      id="loader"
+      class="loader"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading"
+    >
+      <div>
+        <div class="ring"></div>
+        <div class="logo-type">Initializing Portfolio</div>
+      </div>
     </div>
 
-    <div class="main-content" id="mainContent">
-      <section class="hero">
-        <div class="hero-content">
-          <h1 class="hero-title">Innovation Hub</h1>
-          <p class="hero-subtitle">
-            Discover cutting-edge projects crafted with precision and creativity
-          </p>
-          <div class="scroll-indicator">
-            <span class="scroll-text">Scroll to Explore</span>
-            <div class="scroll-arrow"></div>
+    <header class="max-w-6xl mx-auto px-6 pt-14 md:pt-20 pb-10 text-center">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 text-white/70 text-sm mb-4"
+      >
+        <span
+          class="w-1.5 h-1.5 rounded-full"
+          style="
+            background: rgb(var(--ring));
+            box-shadow: 0 0 16px rgba(var(--ring), 0.8);
+          "
+        ></span>
+        Yazd Cyber Police
+      </div>
+      <h1
+        class="text-4xl md:text-5xl font-extrabold tracking-tight mb-3 bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent"
+      >
+        Project Portfolio
+      </h1>
+      <p class="text-white/80 max-w-2xl mx-auto">
+        A curated set of software built for the Yazd Cyber Police. Live GitHub
+        signals, professional visuals, and smooth animations.
+      </p>
+      <nav
+        class="mt-6 flex items-center justify-center gap-3 text-sm text-white/70"
+      >
+        <a
+          class="hover:text-white transition-colors underline-offset-4 hover:underline"
+          href="#projects"
+          >Projects</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          class="hover:text-white transition-colors underline-offset-4 hover:underline"
+          href="#about"
+          >About</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          class="hover:text-white transition-colors underline-offset-4 hover:underline"
+          href="#contact"
+          >Contact</a
+        >
+      </nav>
+    </header>
+
+    <!-- Curved SVG divider -->
+    <div class="relative">
+      <svg
+        aria-hidden="true"
+        width="100%"
+        height="50"
+        viewBox="0 0 1440 60"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,32 C320,64 1120,0 1440,32 L1440,60 L0,60 Z"
+          fill="rgba(255,255,255,.06)"
+        ></path>
+      </svg>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-6 pb-24">
+      <!-- Projects -->
+      <section
+        id="projects"
+        aria-label="Featured projects"
+        class="scroll-mt-24"
+      >
+        <div class="flex items-end justify-between mb-6">
+          <h2 class="text-2xl md:text-3xl font-bold">Featured Projects</h2>
+          <div
+            class="text-xs font-medium px-2 py-1 rounded-full border border-white/15 text-white/70"
+          >
+            Auto-updating
           </div>
-          <a href="#projects" class="cta-button">Explore Projects</a>
+        </div>
+
+        <div
+          class="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <!-- Bankiran -->
+          <article class="card p-6 reveal" role="article">
+            <div
+              class="thumb mb-5"
+              style="background: linear-gradient(135deg, #f093fb, #f5576c)"
+            >
+              <img
+                src="https://opengraph.githubassets.com/1/mehrshud/Bankiran"
+                alt="Bankiran repository preview"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+            <header class="mb-3">
+              <h3 class="text-xl font-semibold">Bankiran</h3>
+              <p class="text-white/80 mt-1">
+                Card number & transaction analyzer with Luhn validation,
+                advanced filtering, RTL UI, and Excel export.
+              </p>
+            </header>
+            <div class="flex items-center gap-3 text-sm text-white/70 mb-3">
+              <span
+                class="last-updated skeleton h-4 w-36 rounded"
+                data-repo="mehrshud/Bankiran"
+                aria-live="polite"
+                style="display: inline-block"
+              ></span>
+              <span
+                class="w-1.5 h-1.5 rounded-full"
+                style="background: rgba(124, 58, 237, 0.6)"
+              ></span>
+              <span
+                class="langs skeleton h-4 w-40 rounded"
+                data-repo-langs="mehrshud/Bankiran"
+                style="display: inline-block"
+              ></span>
+            </div>
+            <div class="flex flex-wrap gap-3 mt-4">
+              <a
+                class="btn"
+                href="https://github.com/mehrshud/Bankiran"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Bankiran GitHub"
+                >GitHub</a
+              >
+              <a
+                class="btn"
+                href="https://bankiran.vercel.app/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Bankiran Live Demo"
+                >Live Demo</a
+              >
+            </div>
+          </article>
+
+          <!-- Kavosh Frontend -->
+          <article class="card p-6 reveal" role="article">
+            <div
+              class="thumb mb-5"
+              style="background: linear-gradient(135deg, #667eea, #764ba2)"
+            >
+              <img
+                src="https://opengraph.githubassets.com/1/mehrshud/kavosh"
+                alt="Kavosh Frontend repository preview"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+            <header class="mb-3">
+              <h3 class="text-xl font-semibold">Kavosh (Frontend)</h3>
+              <p class="text-white/80 mt-1">
+                Multi-platform social search with AI analysis (OpenAI/Gemini),
+                analytics, and RTL support.
+              </p>
+            </header>
+            <div class="flex items-center gap-3 text-sm text-white/70 mb-3">
+              <span
+                class="last-updated skeleton h-4 w-36 rounded"
+                data-repo="mehrshud/kavosh"
+                aria-live="polite"
+                style="display: inline-block"
+              ></span>
+              <span
+                class="w-1.5 h-1.5 rounded-full"
+                style="background: rgba(124, 58, 237, 0.6)"
+              ></span>
+              <span
+                class="langs skeleton h-4 w-40 rounded"
+                data-repo-langs="mehrshud/kavosh"
+                style="display: inline-block"
+              ></span>
+            </div>
+            <div class="flex flex-wrap gap-3 mt-4">
+              <a
+                class="btn"
+                href="https://github.com/mehrshud/kavosh"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Kavosh Frontend GitHub"
+                >GitHub</a
+              >
+              <a
+                class="btn"
+                href="https://newkavosh.vercel.app/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Kavosh Live Demo"
+                >Live Demo</a
+              >
+            </div>
+          </article>
+
+          <!-- Kavosh Backend -->
+          <article class="card p-6 reveal" role="article">
+            <div
+              class="thumb mb-5"
+              style="background: linear-gradient(135deg, #4e54c8, #8f94fb)"
+            >
+              <img
+                src="https://opengraph.githubassets.com/1/mehrshud/kavosh-backend"
+                alt="Kavosh Backend repository preview"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+            <header class="mb-3">
+              <h3 class="text-xl font-semibold">Kavosh (Backend)</h3>
+              <p class="text-white/80 mt-1">
+                Node.js backend powering Kavosh platform with server/API
+                codebase.
+              </p>
+            </header>
+            <div class="flex items-center gap-3 text-sm text-white/70 mb-3">
+              <span
+                class="last-updated skeleton h-4 w-36 rounded"
+                data-repo="mehrshud/kavosh-backend"
+                aria-live="polite"
+                style="display: inline-block"
+              ></span>
+              <span
+                class="w-1.5 h-1.5 rounded-full"
+                style="background: rgba(124, 58, 237, 0.6)"
+              ></span>
+              <span
+                class="langs skeleton h-4 w-40 rounded"
+                data-repo-langs="mehrshud/kavosh-backend"
+                style="display: inline-block"
+              ></span>
+            </div>
+            <div class="flex flex-wrap gap-3 mt-4">
+              <a
+                class="btn"
+                href="https://github.com/mehrshud/kavosh-backend"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Kavosh Backend GitHub"
+                >GitHub</a
+              >
+              <a class="btn" aria-disabled="true" tabindex="-1">Live Demo</a>
+            </div>
+          </article>
+
+          <!-- Telyab -->
+          <article class="card p-6 reveal" role="article">
+            <div
+              class="thumb mb-5"
+              style="background: linear-gradient(135deg, #4facfe, #00f2fe)"
+            >
+              <img
+                src="https://opengraph.githubassets.com/1/mehrshud/telyab"
+                alt="Telyab repository preview"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            </div>
+            <header class="mb-3">
+              <h3 class="text-xl font-semibold">Telyab</h3>
+              <p class="text-white/80 mt-1">
+                Telegram username lookup with dark mode, history, and modern UI.
+              </p>
+            </header>
+            <div class="flex items-center gap-3 text-sm text-white/70 mb-3">
+              <span
+                class="last-updated skeleton h-4 w-36 rounded"
+                data-repo="mehrshud/telyab"
+                aria-live="polite"
+                style="display: inline-block"
+              ></span>
+              <span
+                class="w-1.5 h-1.5 rounded-full"
+                style="background: rgba(124, 58, 237, 0.6)"
+              ></span>
+              <span
+                class="langs skeleton h-4 w-40 rounded"
+                data-repo-langs="mehrshud/telyab"
+                style="display: inline-block"
+              ></span>
+            </div>
+            <div class="flex flex-wrap gap-3 mt-4">
+              <a
+                class="btn"
+                href="https://github.com/mehrshud/telyab"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Telyab GitHub"
+                >GitHub</a
+              >
+              <a
+                class="btn"
+                href="https://telyab.vercel.app/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Open Telyab Live Demo"
+                >Live Demo</a
+              >
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="projects-section" id="projects">
-        <h2 class="section-title scroll-animate">Featured Projects</h2>
-        <div class="projects-grid">
-          <!-- KAVOSH PROJECT -->
-          <div class="project-card scroll-animate-left">
-            <div class="project-image kavosh-bg">KAVOSH</div>
-            <div class="project-content">
-              <h3 class="project-title">Kavosh</h3>
-              <p class="project-developer">Developed by: Mehrshad Hamavandy</p>
-              <p class="project-description">
-                A sophisticated web application featuring modern design
-                principles and robust functionality. Kavosh represents
-                excellence in user experience and technical implementation,
-                showcasing advanced development practices.
-              </p>
-              <div class="project-links">
-                <a
-                  href="https://github.com/mehrshud/kavosh"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M12,2A10,10,0,0,0,2,12c0,4.42,2.87,8.17,6.84,9.5.5.09.68-.22.68-.48s0-.85,0-1.67c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6,1,.07,1.53,1.03,1.53,1.03.89,1.53,2.34,1.09,2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94,0-1.1.39-1.99,1.03-2.69a3.6,3.6,0,0,1,.1-2.64s.84-.27,2.75,1.02a9.58,9.58,0,0,1,5,0c1.91-1.29,2.75-1.02,2.75-1.02a3.6,3.6,0,0,1,.1,2.64c.64.7,1.03,1.6,1.03,2.69,0,3.84-2.34,4.68-4.57,4.93.36.31.68.92.68,1.85,0,1.34,0,2.42,0,2.75s.18.57.69.48A10,10,0,0,0,22,12,10,10,0,0,0,12,2Z"
-                    />
-                  </svg>
-                  GitHub
-                </a>
-                <span class="project-link-disabled">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                  </svg>
-                  Coming Soon
-                </span>
-              </div>
-              <div class="tech-stack">
-                <h4>Technologies Used:</h4>
-                <div class="tech-tags">
-                  <span class="tech-tag">React</span
-                  ><span class="tech-tag">Next.js</span
-                  ><span class="tech-tag">TypeScript</span
-                  ><span class="tech-tag">TailwindCSS</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="my-14 divider" role="presentation"></div>
 
-          <!-- BANKIRAN PROJECT -->
-          <div class="project-card scroll-animate-scale">
-            <div class="project-image bankiran-bg">BANKIRAN</div>
-            <div class="project-content">
-              <h3 class="project-title">Bankiran</h3>
-              <p class="project-developer">Developed by: Mehrshad Hamavandy</p>
-              <p class="project-description">
-                A comprehensive banking solution with secure architecture and
-                intuitive interface design. Bankiran demonstrates expertise in
-                financial technology, incorporating industry-standard security
-                measures and seamless user interactions.
-              </p>
-              <div class="project-links">
-                <a
-                  href="https://github.com/mehrshud/Bankiran"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M12,2A10,10,0,0,0,2,12c0,4.42,2.87,8.17,6.84,9.5.5.09.68-.22.68-.48s0-.85,0-1.67c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6,1,.07,1.53,1.03,1.53,1.03.89,1.53,2.34,1.09,2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94,0-1.1.39-1.99,1.03-2.69a3.6,3.6,0,0,1,.1-2.64s.84-.27,2.75,1.02a9.58,9.58,0,0,1,5,0c1.91-1.29,2.75-1.02,2.75-1.02a3.6,3.6,0,0,1,.1,2.64c.64.7,1.03,1.6,1.03,2.69,0,3.84-2.34,4.68-4.57,4.93.36.31.68.92.68,1.85,0,1.34,0,2.42,0,2.75s.18.57.69.48A10,10,0,0,0,22,12,10,10,0,0,0,12,2Z"
-                    />
-                  </svg>
-                  GitHub
-                </a>
-                <a
-                  href="https://bankiran.vercel.app/"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-4.5 0V6.375c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A2.25 2.25 0 0 1 10.5 18v-2.25"
-                    />
-                  </svg>
-                  Live Demo
-                </a>
-              </div>
-              <div class="tech-stack">
-                <h4>Technologies Used:</h4>
-                <div class="tech-tags">
-                  <span class="tech-tag">Node.js</span
-                  ><span class="tech-tag">Express</span
-                  ><span class="tech-tag">MongoDB</span
-                  ><span class="tech-tag">Security</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TELYAB PROJECT -->
-          <div class="project-card scroll-animate-right">
-            <div class="project-image telyab-bg">TELYAB</div>
-            <div class="project-content">
-              <h3 class="project-title">Telyab</h3>
-              <p class="project-developer">Developed by: Mehrshad Hamavandy</p>
-              <p class="project-description">
-                An innovative communication platform engineered for optimal
-                performance and scalability. Telyab showcases advanced real-time
-                capabilities and modern architectural patterns, delivering
-                exceptional user engagement.
-              </p>
-              <div class="project-links">
-                <a
-                  href="https://github.com/mehrshud/telyab"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M12,2A10,10,0,0,0,2,12c0,4.42,2.87,8.17,6.84,9.5.5.09.68-.22.68-.48s0-.85,0-1.67c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6,1,.07,1.53,1.03,1.53,1.03.89,1.53,2.34,1.09,2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94,0-1.1.39-1.99,1.03-2.69a3.6,3.6,0,0,1,.1-2.64s.84-.27,2.75,1.02a9.58,9.58,0,0,1,5,0c1.91-1.29,2.75-1.02,2.75-1.02a3.6,3.6,0,0,1,.1,2.64c.64.7,1.03,1.6,1.03,2.69,0,3.84-2.34,4.68-4.57,4.93.36.31.68.92.68,1.85,0,1.34,0,2.42,0,2.75s.18.57.69.48A10,10,0,0,0,22,12,10,10,0,0,0,12,2Z"
-                    />
-                  </svg>
-                  GitHub
-                </a>
-                <a
-                  href="https://telyab.vercel.app/"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-4.5 0V6.375c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A2.25 2.25 0 0 1 10.5 18v-2.25"
-                    />
-                  </svg>
-                  Live Demo
-                </a>
-              </div>
-              <div class="tech-stack">
-                <h4>Technologies Used:</h4>
-                <div class="tech-tags">
-                  <span class="tech-tag">WebSocket</span
-                  ><span class="tech-tag">Real-time</span
-                  ><span class="tech-tag">API</span
-                  ><span class="tech-tag">Database</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- KAVOSH LOG SECTION -->
-      <section class="projects-section" id="kavosh-log-section">
-        <h2 class="section-title scroll-animate">Kavosh Build Log</h2>
-        <div class="terminal-window scroll-animate-scale" id="kavosh-terminal">
-          <div class="terminal-header">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-            <div class="terminal-title">bash -- Vercel Build</div>
-          </div>
-          <div class="terminal-body">
-            <code id="log-output"></code>
-          </div>
-        </div>
-      </section>
-
-      <footer class="footer scroll-animate-fade">
-        <p>
-          &copy; 2025 Fata CyberPolice. Showcasing excellence in digital
-          innovation.
+      <!-- About -->
+      <section id="about" class="mt-10 scroll-mt-24">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">About</h2>
+        <p class="text-white/80 max-w-3xl">
+          Projects on this page were developed for the
+          <strong>Yazd Cyber Police</strong>. Focus: reliable tooling, clean UI,
+          and accessible UX. The portfolio displays live GitHub metadata and
+          uses motion to guide attention.
         </p>
-      </footer>
-    </div>
+      </section>
 
+      <!-- Contact -->
+      <section id="contact" class="mt-16 scroll-mt-24">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Contact</h2>
+        <p class="text-white/80">
+          Email:
+          <a
+            class="underline underline-offset-4 hover:text-white"
+            href="mailto:mehrshadhamavandy@gmail.com"
+            >mehrshadhamavandy@gmail.com</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-6 pb-16 pt-8 text-center text-white/70">
+      <p class="mb-1">
+        &copy; <span id="year"></span> Yazd Cyber Police — All rights reserved.
+      </p>
+      <p class="text-white/60 text-sm">
+        This portfolio showcases software created specifically for the Yazd
+        Cyber Police. Redistribution or reuse requires explicit permission.
+      </p>
+    </footer>
+
+    <!-- GitHub dynamic meta + animations -->
     <script>
-      // --- PARTICLE BACKGROUND ---
-      function createParticles() {
-        const particles = document.getElementById("particles");
-        if (!particles) return;
-        const particleCount = 15;
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement("div");
-          particle.className = "particle";
-          const size = Math.random() * 4 + 2;
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          particle.style.left = `${Math.random() * 100}%`;
-          particle.style.top = `${Math.random() * 100}%`;
-          particle.style.animationDelay = `${Math.random() * 6}s`;
-          particle.style.animationDuration = `${Math.random() * 4 + 4}s`;
-          particles.appendChild(particle);
+      // Year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Ambient stars (lightweight)
+      const stars = document.querySelector(".stars");
+      for (let i = 0; i < 80; i++) {
+        const s = document.createElement("span");
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 100 + "%";
+        s.style.animationDelay = Math.random() * 3 + "s";
+        stars.appendChild(s);
+      }
+
+      // Page loader: hide after initial network ops
+      const loader = document.getElementById("loader");
+      window.addEventListener("load", () =>
+        setTimeout(() => loader.classList.add("hidden"), 450)
+      );
+
+      // Parallax blobs follow cursor slightly
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const target = { x: 0, y: 0 };
+      const state = { x: 0, y: 0 };
+      function tick() {
+        state.x = lerp(state.x, target.x, 0.06);
+        state.y = lerp(state.y, target.y, 0.06);
+        const b1 = document.getElementById("blob1");
+        const b2 = document.getElementById("blob2");
+        if (b1)
+          b1.style.transform = `translate(${state.x * 0.03}px, ${
+            state.y * 0.02
+          }px)`;
+        if (b2)
+          b2.style.transform = `translate(${state.x * -0.02}px, ${
+            state.y * -0.03
+          }px)`;
+        requestAnimationFrame(tick);
+      }
+      tick();
+      window.addEventListener(
+        "mousemove",
+        (e) => {
+          const cx = window.innerWidth / 2,
+            cy = window.innerHeight / 2;
+          target.x = e.clientX - cx;
+          target.y = e.clientY - cy;
+        },
+        { passive: true }
+      );
+
+      // Intersection-based reveal for cards
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll(".card.reveal").forEach((el) => io.observe(el));
+
+      // ---- GitHub helpers ----
+      const GH_HEADERS = {
+        "X-GitHub-Api-Version": "2022-11-28",
+        Accept: "application/vnd.github+json",
+      };
+      const cacheGet = (k) => {
+        try {
+          const o = JSON.parse(localStorage.getItem(k));
+          if (!o || Date.now() > o.exp) return null;
+          return o.data;
+        } catch {
+          return null;
+        }
+      };
+      const cacheSet = (k, data, ttl = 12 * 60 * 60 * 1000) => {
+        try {
+          localStorage.setItem(
+            k,
+            JSON.stringify({ data, exp: Date.now() + ttl })
+          );
+        } catch {}
+      };
+
+      const timeAgo = (iso) => {
+        if (!iso) return "—";
+        const s = Math.max(0, (Date.now() - new Date(iso)) / 1000);
+        const units = [
+          [60, "s"],
+          [60, "m"],
+          [24, "h"],
+          [7, "d"],
+          [4.345, "wk"],
+          [12, "mo"],
+        ];
+        let v = s;
+        for (const [step, l] of units) {
+          if (v < step) return `${Math.floor(v)}${l} ago`;
+          v /= step;
+        }
+        return `${Math.floor(v)}y ago`;
+      };
+
+      async function json(url) {
+        const r = await fetch(url, { headers: GH_HEADERS });
+        if (!r.ok) throw new Error(r.status + " " + r.statusText);
+        return r.json();
+      }
+
+      async function latestUpdatedISO(repo) {
+        const key = `gh:updated:${repo}`;
+        const cached = cacheGet(key);
+        if (cached) return cached;
+        try {
+          const commits = await json(
+            `https://api.github.com/repos/${repo}/commits?per_page=1`
+          );
+          const iso =
+            commits?.[0]?.commit?.author?.date ||
+            commits?.[0]?.commit?.committer?.date ||
+            null;
+          cacheSet(key, iso);
+          return iso;
+        } catch {
+          try {
+            const meta = await json(`https://api.github.com/repos/${repo}`);
+            const iso = meta?.pushed_at || meta?.updated_at || null;
+            cacheSet(key, iso);
+            return iso;
+          } catch {
+            return null;
+          }
         }
       }
 
-      // --- WELCOME SEQUENCE ---
-      function startWelcomeSequence() {
-        const welcome1 = document.getElementById("welcome1");
-        const welcome2 = document.getElementById("welcome2");
-        const mainContent = document.getElementById("mainContent");
-
-        setTimeout(() => {
-          welcome1.classList.add("fade-out");
-          setTimeout(() => {
-            welcome1.classList.add("hidden");
-            welcome2.style.display = "flex";
-            setTimeout(() => {
-              welcome2.classList.add("fade-out");
-              setTimeout(() => {
-                welcome2.classList.add("hidden");
-                mainContent.classList.add("show");
-              }, 1000);
-            }, 3000);
-          }, 1000);
-        }, 3500);
-      }
-
-      // --- KAVOSH LOG ANIMATION ---
-      const logData =
-        `[04:55:53.530] Running build in Washington, D.C., USA (East) – iad1
-[04:55:53.531] Build machine configuration: 2 cores, 8 GB
-[04:55:53.565] Cloning github.com/mehrshud/kavosh (Branch: main, Commit: bd9b148)
-[04:55:53.686] Previous build caches not available
-[04:55:53.828] Cloning completed: 262.000ms
-[04:55:55.920] Running "vercel build"
-[04:55:56.433] Vercel CLI 44.6.4
-[04:55:56.757] Installing dependencies...
-[04:55:59.704] npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
-[04:56:00.475] npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
-[04:56:00.807] npm warn deprecated glob@7.1.7: Glob versions prior to v9 are no longer supported
-[04:56:01.071] npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
-[04:56:01.748] npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
-[04:56:01.790] npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
-[04:56:04.257] npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
-[04:56:16.516] 
-[04:56:16.517] added 531 packages in 19s
-[04:56:16.517] 
-[04:56:16.518] 172 packages are looking for funding
-[04:56:16.518]   run \`npm fund\` for details
-[04:56:16.568] Detected Next.js version: 14.0.3
-[04:56:16.574] Running "npm run build"
-[04:56:16.685] 
-[04:56:16.686] > kavosh@2.0.0 build
-[04:56:16.686] > next build
-[04:56:16.686] 
-[04:56:17.192] Attention: Next.js now collects completely anonymous telemetry regarding usage.
-[04:56:17.194] This information is used to shape Next.js' roadmap and prioritize features.
-[04:56:17.194] You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-[04:56:17.194] https://nextjs.org/telemetry
-[04:56:17.194] 
-[04:56:17.274]   ▲ Next.js 14.0.3
-[04:56:17.275] 
-[04:56:17.275]   Creating an optimized production build ...
-[04:56:35.276]  ✓ Compiled successfully
-[04:56:35.277]   Skipping validation of types
-[04:56:35.278]   Skipping linting
-[04:56:35.584]   Collecting page data ...
-[04:56:35.939] ti [Error]: The OPENAI_API_KEY environment variable is missing or empty; either provide it, or instantiate the OpenAI client with an apiKey option, like new OpenAI({ apiKey: 'My API Key' }).
-[04:56:35.940]     at new dQ (/vercel/path0/.next/server/chunks/315.js:169:30797)
-[04:56:35.940]     at 11057 (/vercel/path0/.next/server/app/api/analyze/route.js:1:6240)
-[04:56:35.940]     at t (/vercel/path0/.next/server/webpack-runtime.js:1:142)
-[04:56:35.941]     at 38847 (/vercel/path0/.next/server/app/api/analyze/route.js:1:1014)
-[04:56:35.941]     at t (/vercel/path0/.next/server/webpack-runtime.js:1:142)
-[04:56:35.941]     at n (/vercel/path0/.next/server/app/api/analyze/route.js:48:2038)
-[04:56:35.943]     at /vercel/path0/.next/server/app/api/analyze/route.js:48:2073
-[04:56:35.943]     at t.X (/vercel/path0/.next/server/webpack-runtime.js:1:1270)
-[04:56:35.944]     at /vercel/path0/.next/server/app/api/analyze/route.js:48:2051
-[04:56:35.944]     at Object.<anonymous> (/vercel/path0/.next/server/app/api/analyze/route.js:48:2101)
-[04:56:35.945] 
-[04:56:35.945] > Build error occurred
-[04:56:35.945] Error: Failed to collect page data for /api/analyze
-[04:56:35.945]     at /vercel/path0/node_modules/next/dist/build/utils.js:1217:15
-[04:56:35.946]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
-[04:56:35.946]   type: 'Error'
-[04:56:35.946] }
-[04:56:36.007] Error: Command "npm run build" exited with 1
-[04:56:39.247] Exiting build container`.split("\n");
-
-      function animateKavoshLog() {
-        const logOutput = document.getElementById("log-output");
-        const terminalBody = logOutput.parentElement;
-        if (!logOutput) return;
-
-        let i = 0;
-        logOutput.innerHTML = ""; // Clear previous content
-
-        const interval = setInterval(() => {
-          if (i >= logData.length) {
-            clearInterval(interval);
-            return;
-          }
-
-          const line = logData[i];
-          const lineEl = document.createElement("span");
-
-          if (
-            line.includes("[Error]:") ||
-            line.toLowerCase().startsWith("error:")
-          ) {
-            lineEl.className = "log-line-error";
-          } else if (line.toLowerCase().includes("warn")) {
-            lineEl.className = "log-line-warn";
-          } else if (
-            line.toLowerCase().includes("success") ||
-            line.toLowerCase().includes("✓ compiled")
-          ) {
-            lineEl.className = "log-line-success";
-          } else if (line.startsWith("[")) {
-            lineEl.className = "log-line-info";
-          } else {
-            lineEl.className = "log-line-dim";
-          }
-
-          // Use textContent to prevent any HTML injection issues
-          lineEl.textContent = line;
-          logOutput.appendChild(lineEl);
-          // Auto-scroll to the bottom
-          terminalBody.scrollTop = terminalBody.scrollHeight;
-          i++;
-        }, 50); // Adjusted speed for faster typing
-      }
-
-      // --- SCROLL ANIMATIONS ---
-      function setupScrollAnimations() {
-        const observerOptions = { threshold: 0.2, rootMargin: "-50px" };
-        const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animate");
-              // Special trigger for the terminal animation
-              if (
-                entry.target.id === "kavosh-terminal" &&
-                !entry.target.dataset.animated
-              ) {
-                animateKavoshLog();
-                entry.target.dataset.animated = "true"; // Ensure it only runs once per page load
-              }
-              // Optional: unobserve after animation to save resources
-              // observer.unobserve(entry.target);
-            }
-          });
-        }, observerOptions);
-
-        document
-          .querySelectorAll(
-            ".scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale, .scroll-animate-fade"
-          )
-          .forEach((el) => observer.observe(el));
-      }
-
-      // --- CURSOR TRAIL ---
-      function addCursorTrail() {
-        const trail = document.createElement("div");
-        trail.style.cssText = `
-            position: fixed;
-            left: 0; top: 0;
-            width: 8px; height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        `;
-        document.body.appendChild(trail);
-
-        window.addEventListener("mousemove", (e) => {
-          trail.style.opacity = "1";
-          trail.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
-        });
-
-        document.body.addEventListener("mouseleave", () => {
-          trail.style.opacity = "0";
-          trail.style.transform = trail.style.transform.replace(
-            "scale(1)",
-            "scale(0)"
+      async function topLanguages(repo) {
+        const key = `gh:langs:${repo}`;
+        const cached = cacheGet(key);
+        if (cached) return cached;
+        try {
+          const langs = await json(
+            `https://api.github.com/repos/${repo}/languages`
           );
-        });
+          const top = Object.entries(langs)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 6)
+            .map(([n]) => n);
+          cacheSet(key, top);
+          return top;
+        } catch {
+          return [];
+        }
       }
 
-      // --- INITIALIZE EVERYTHING ---
-      document.addEventListener("DOMContentLoaded", () => {
-        createParticles();
-        startWelcomeSequence();
-        setupScrollAnimations();
-        addCursorTrail();
-        console.log("🚀 Fata CyberPolice Portfolio Loaded Successfully");
-      });
+      function unskeleton(el, text) {
+        el.classList.remove("skeleton");
+        el.style.width = "auto";
+        el.textContent = text;
+      }
+
+      async function enhance(repo) {
+        const updatedEls = document.querySelectorAll(
+          `.last-updated[data-repo="${repo}"]`
+        );
+        const langsEls = document.querySelectorAll(
+          `.langs[data-repo-langs="${repo}"]`
+        );
+        try {
+          const [iso, langs] = await Promise.all([
+            latestUpdatedISO(repo),
+            topLanguages(repo),
+          ]);
+          updatedEls.forEach((el) =>
+            unskeleton(el, iso ? `Updated ${timeAgo(iso)}` : "Updated —")
+          );
+          langsEls.forEach((el) => {
+            el.classList.remove("skeleton");
+            el.style.width = "auto";
+            el.innerHTML = langs.length
+              ? langs.map((l) => `<span class="tag">${l}</span>`).join(" ")
+              : `<span class="text-white/60">Tech n/a</span>`;
+          });
+        } catch (e) {
+          updatedEls.forEach((el) => unskeleton(el, "Updated —"));
+          langsEls.forEach((el) => {
+            el.classList.remove("skeleton");
+            el.textContent = "Tech n/a";
+          });
+        }
+      }
+
+      [
+        "mehrshud/Bankiran",
+        "mehrshud/kavosh",
+        "mehrshud/kavosh-backend",
+        "mehrshud/telyab",
+      ].forEach(enhance);
     </script>
   </body>
 </html>
